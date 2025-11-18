@@ -1,3 +1,6 @@
+"""
+AyurWell - Ayurvedic Health Assistant with Responsive Design
+"""
 from flask import Flask, request, jsonify, render_template, send_file
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
