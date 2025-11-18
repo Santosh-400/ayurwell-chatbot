@@ -295,10 +295,12 @@ def tts_edge():
 # All old TTS endpoints have been removed and replaced by the new /tts endpoint above.
 
 if __name__ == "__main__":
-    # Get port from environment variable (for cloud deployment) or default to 5000
-    port = int(os.environ.get("PORT", 5000))
+    # Get port from environment variable (for cloud deployment) or default to 8080
+    # Changed from 5000 to 8080 to avoid conflicts with other services
+    port = int(os.environ.get("PORT", 8080))
     # Disable debug mode in production (cloud environments)
     debug_mode = os.environ.get("FLASK_ENV", "production") == "development"
+    # use_reloader=False prevents "signal only works in main thread" error in cloud deployments
     app.run(debug=debug_mode, host="0.0.0.0", port=port, use_reloader=False)
 
 
