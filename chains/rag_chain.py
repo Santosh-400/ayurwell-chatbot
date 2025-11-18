@@ -1,5 +1,6 @@
 import os
-from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_pinecone import PineconeVectorStore
 from .prompt_templates import rag_prompt
 try:
@@ -17,8 +18,12 @@ if env_model and "gemini-1.5" in env_model:
 # (confirmed via REST model list): gemini-2.0-flash-001
 model = "gemini-2.0-flash-001"
 
-# Use Google's embeddings instead of HuggingFace (lighter and cloud-friendly)
-embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
+# Use HuggingFace embeddings (runs locally, no API quota limits)
+embeddings = HuggingFaceEmbeddings(
+    model_name="sentence-transformers/all-MiniLM-L6-v2",
+    model_kwargs={'device': 'cpu'},
+    encode_kwargs={'normalize_embeddings': True}
+)
 
 # Initialize Pinecone retriever from existing index
 try:
