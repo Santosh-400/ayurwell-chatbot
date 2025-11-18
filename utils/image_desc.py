@@ -16,13 +16,16 @@ GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 if not GROQ_API_KEY:
-    raise ValueError("GROQ API KEY is not set in the .env file")
+    logger.warning("GROQ API KEY is not set - image description will not work")
 
 def describe_image(image_path):
     """
     Takes an image file path and returns a 1–2 line description about the image
     focused on health-related topics, or a fallback response if not health-related.
     """
+    if not GROQ_API_KEY:
+        return {"error": "Image processing is not configured. GROQ_API_KEY is missing."}
+    
     try:
         with open(image_path, "rb") as image_file:
             image_content = image_file.read()

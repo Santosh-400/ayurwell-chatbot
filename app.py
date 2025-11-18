@@ -91,16 +91,31 @@ def chat():
 
     # If image is provided
     if image_file:
-        filename = secure_filename(image_file.filename)
-        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        image_file.save(filepath)
+        try:
+            filename = secure_filename(image_file.filename)
+            if not filename:
+                return jsonify({"reply": "Invalid filename. Please upload a valid image."})
+            
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            image_file.save(filepath)
 
-        image_result = describe_image(filepath)
+            image_result = describe_image(filepath)
 
-        if "description" in image_result:
-            final_query = image_result["description"]
-        else:
-            return jsonify({"reply": f"Image processing error: {image_result['error']}"})
+            # Clean up uploaded file after processing
+            try:
+                os.remove(filepath)
+            except Exception:
+                pass
+
+            if "description" in image_result:
+                final_query = image_result["description"]
+            else:
+                error_msg = image_result.get('error', 'Unknown error')
+                app.logger.error(f"Image processing failed: {error_msg}")
+                return jsonify({"reply": f"Image processing error: {error_msg}"})
+        except Exception as img_error:
+            app.logger.exception("Image upload/processing failed")
+            return jsonify({"reply": f"Failed to process image: {str(img_error)}"})
     
     # If text is provided (use either or both)
     if text_input:
