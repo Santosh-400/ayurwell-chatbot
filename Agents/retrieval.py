@@ -79,8 +79,11 @@ def websearch(state: AgentState):
         state["proceed_to_generate"] = False
         return state
     
+    # Force Ayurvedic context in web search
+    ayurvedic_query = f"Ayurvedic treatment remedy {state['enhanced_query']}"
+    
     try:
-        results = tavily_search.invoke({"query": state["enhanced_query"]})
+        results = tavily_search.invoke({"query": ayurvedic_query})
     except Exception as e:
         print(f"web_search: Tavily API failed - {e}")
         state["documents"] = []
