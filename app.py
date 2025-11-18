@@ -297,7 +297,7 @@ def tts_edge():
 if __name__ == "__main__":
     # Get port from environment variable (for cloud deployment) or default to 8080
     # Changed from 5000 to 8080 to avoid conflicts with other services
-    port = int(os.environ.get("PORT", 8182))
+    port = int(os.environ.get("PORT", 8080))
     # Disable debug mode in production (cloud environments)
     debug_mode = os.environ.get("FLASK_ENV", "production") == "development"
     # use_reloader=False prevents "signal only works in main thread" error in cloud deployments
