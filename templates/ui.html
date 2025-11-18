@@ -13,8 +13,11 @@
 
 <body>
 
+    <!-- Mobile menu toggle button -->
+    <button class="mobile-menu-btn material-icons" onclick="toggleMobileSidebar()">menu</button>
+
     <div class="app-shell" id="appShell">
-        <aside class="sidebar">
+        <aside class="sidebar" id="sidebar">
             <div class="brand">
                 <h1 id="brandTitle">HealthGuru</h1>
                 <p id="brandDesc">Professional Ayurvedic Assistance for holistic wellness and balance.</p>
@@ -89,6 +92,11 @@
             } else {
                 document.documentElement.classList.remove('dark');
             }
+        }
+
+        function toggleMobileSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('mobile-visible');
         }
 
         let selectedLanguage = 'en';
