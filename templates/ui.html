@@ -405,7 +405,7 @@
             if (file) formData.append("image", file);
 
             try {
-                const response = await fetch("http://localhost:5000/chat", {
+                const response = await fetch("/chat", {
                     method: "POST",
                     body: formData
                 });
@@ -415,6 +415,7 @@
                 appendMessage(data.reply, "bot");
             } catch (error) {
                 removeLoading();
+                console.error("Chat error:", error);
                 appendMessage("Something went wrong. Please try again.", "bot");
             }
         }
