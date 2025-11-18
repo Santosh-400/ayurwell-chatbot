@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ayurvedic Chatbot</title>
+    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="app-shell" id="appShell">
+        <aside class="sidebar">
+            <div class="brand">
+                <h1 id="brandTitle">HealthGuru</h1>
+                <p id="brandDesc">Professional Ayurvedic Assistance for holistic wellness and balance.</p>
+                <div class="sidebar-buttons">
+                    <button id="quizBtn" class="primary">Take Dosha Quiz</button>
+                    <button id="consultBtn" class="secondary">Consult Expert</button>
+                </div>
+            </div>
+            <div class="quick-topics">
+                <h3 id="quickTopicsTitle">Quick Topics</h3>
+                <ul>
+                    <li data-i18n="topic1">Digestion & Agni</li>
+                    <li data-i18n="topic2">Sleep & Stress</li>
+                    <li data-i18n="topic3">Seasonal Routines</li>
+                    <li data-i18n="topic4">Herbal Remedies</li>
+                </ul>
+            </div>
+            <div class="sidebar-footer">© 2025 AyurWell · Privacy-first · Evidence-aware</div>
+        </aside>
+
+        <main class="chat-area">
+                <div class="chat-header">
+                <div class="title" id="chatTitle">Chat Assistant</div>
+                <div class="lang-controls">
+                    <label for="langSelect" class="tts-label" id="langLabel">Lang:</label>
+                    <select id="langSelect" onchange="onLangChange()">
+                        <option value="en">English</option>
+                        <option value="kn">Kannada</option>
+                    </select>
+                </div>
+                <button class="dark-mode-btn material-icons" id="darkToggle" onclick="toggleDarkMode()">mode_night</button>
+            </div>
+
+            <div class="chat-container" id="chatContainer">
+                    <div class="chat-box" id="chatBox">
+                    <div class="message bot" id="welcomeMsg"></div>
+                </div>
+
+                <div class="input-area">
+                    <label for="imageUpload" class="icon-upload material-icons">attach_file</label>
+                    <input type="file" id="imageUpload" accept="image/*" onchange="handleImageUpload()" />
+
+                    <div class="input-wrapper">
+                        <input type="text" id="userInput" placeholder="Describe your issue or type 'dosha' to start quiz" onkeydown="handleKeyPress(event)" />
+                        <button class="mic-btn material-icons" id="micIcon" title="Voice input" onclick="startVoiceInput()">mic</button>
+                    </div>
+
+                    <button class="send-btn" onclick="sendMessage()">
+                        <img id="sendArrow" class="arrow" src="{{ url_for('static', filename='arrow.png') }}" />
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div class="footer">
+        <p>Copyright ©AyurWell 2025. All rights reserved. Designed and Developed by Santosh, Viresh and Vishwas</p>
+    </div>
+
+
+    <script>
+        let darkMode = false;
+
+        function toggleDarkMode() {
+            darkMode = !darkMode;
+            const arrow = document.getElementById("sendArrow");
+            arrow.src = darkMode
+                ? "{{ url_for('static', filename='arrow-white.png') }}"
+                : "{{ url_for('static', filename='arrow.png') }}";
+
+            if (darkMode) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        }
+
+        let selectedLanguage = 'en';
+        let audioFallbackToEnglish = false;
+    let prefersGemini = false;
+
+        const TRANSLATIONS = {
+            en: {
+                brandTitle: 'HealthGuru',
+                brandDesc: 'Professional Ayurvedic Assistance for holistic wellness and balance.',
+                quizBtn: 'Take Dosha Quiz',
+                consultBtn: 'Consult Expert',
+                quickTopicsTitle: 'Quick Topics',
+                topic1: 'Digestion & Agni',
+                topic2: 'Sleep & Stress',
+                topic3: 'Seasonal Routines',
+                topic4: 'Herbal Remedies',
+                chatTitle: 'Chat Assistant',
+                langLabel: 'Lang:',
+                micTitle: 'Voice input',
+                userPlaceholder: "Describe your issue or type 'dosha' to start quiz",
+                welcomeMsg: "Namaste 👋 I'm AyurWell, your Ayurvedic wellness guide. Tell me your concern — digestion, sleep, stress, or others.",
+                footerText: 'Copyright ©AyurWell 2025. All rights reserved. Designed and Developed by Santosh, Viresh and Vishwas'
+            },
+            kn: {
+                brandTitle: 'ಆಯುರ್ವೆಲ್',
+                brandDesc: 'ಸಂಯೋಜಿತ ಆರೋಗ್ಯಕ್ಕಾಗಿ ವೃತ್ತಿಪರ ಆಯುರ್ವೇದ ಸಹಾಯ.',
+                quizBtn: 'ದೋಷ ಪರೀಕ್ಷೆ',
+                consultBtn: 'ತಜ್ಞರೊಂದಿಗೆ ಸಲಹೆ',
+                quickTopicsTitle: 'ತ್ವರಿತ ವಿಷಯಗಳು',
+                topic1: 'ಜೀರ್ಣಿ ಮತ್ತು ಅಗ್ನಿ',
+                topic2: 'ನಿದ್ರೆ ಮತ್ತು ಒತ್ತಡ',
+                topic3: 'ಋತು ಚಟುವಟಿಕೆ',
+                topic4: 'ಹೆರ್ಬಲ್ ಪರಿಹಾರಗಳು',
+                chatTitle: 'ಚಾಟ್ ಸಹಾಯಕ',
+                langLabel: 'ಭಾಷೆ:',
+                micTitle: 'ವಾಯ್ಸ್ ಇನ್ಪುಟ್',
+                userPlaceholder: "ನಿಮ್ಮ ಸಮಸ್ಯೆಯನ್ನು ವಿವರಿಸಿ ಅಥವಾ 'ದೋಷ' ಎಂದು ಟೈಪ್ ಮಾಡಿ",
+                welcomeMsg: 'ನಮಸ್ಕಾರ 👋 ನಾನು ಆಯುರ್ವೆಲ್, ನಿಮ್ಮ ಆಯುರ್ವೇದ ಆರೋಗ್ಯ ಮಾರ್ಗದರ್ಶಿ. ನಿಮ್ಮ ಸಮಸ್ಯೆಯನ್ನು ಹೇಳಿ — ಜೀರ್ಣ, ನಿದ್ರೆ, ಒತ್ತಡ ಅಥವಾ ಇತರೆ.' ,
+                footerText: 'ಕಾಪಿರೈಟ್ ©AyurWell 2025. ಎಲ್ಲಾ ಹಕ್ಕುಗಳು ಸಂರಕ್ಷಿತ.'
+            }
+        };
+
+        function localizeUI() {
+            const t = TRANSLATIONS[selectedLanguage] || TRANSLATIONS['en'];
+            // Sidebar
+            document.getElementById('brandTitle').innerText = t.brandTitle;
+            document.getElementById('brandDesc').innerText = t.brandDesc;
+            document.getElementById('quizBtn').innerText = t.quizBtn;
+            document.getElementById('consultBtn').innerText = t.consultBtn;
+            document.getElementById('quickTopicsTitle').innerText = t.quickTopicsTitle;
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) el.innerText = t[key];
+            });
+            // Chat header
+            document.getElementById('chatTitle').innerText = t.chatTitle;
+            document.getElementById('langLabel').innerText = t.langLabel;
+            // Input controls
+            const mic = document.getElementById('micIcon');
+            if (mic) mic.title = t.micTitle;
+            const inp = document.getElementById('userInput');
+            if (inp) inp.placeholder = t.userPlaceholder;
+            // Welcome message
+            const wm = document.getElementById('welcomeMsg');
+            if (wm) wm.innerText = t.welcomeMsg;
+            // Footer
+            const footerP = document.querySelector('.footer p');
+            if (footerP) footerP.innerText = t.footerText;
+        }
+
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // initial localization
+            localizeUI();
+            // set recognition language if initialized later
+            try { if (typeof recognition !== 'undefined' && recognition) recognition.lang = selectedLanguage === 'kn' ? 'kn-IN' : 'en-US'; } catch(e){}
+        });
+
+        function onLangChange() {
+            const sel = document.getElementById('langSelect');
+            selectedLanguage = sel ? sel.value : 'en';
+            // If recognition exists, update its language immediately so speech is captured correctly
+            try {
+                if (typeof recognition !== 'undefined' && recognition) {
+                    recognition.lang = selectedLanguage === 'kn' ? 'kn-IN' : 'en-US';
+                }
+            } catch (e) {
+                console.warn('Could not set recognition.lang', e);
+            }
+            // Update UI language immediately
+            try { localizeUI(); } catch (e) { console.warn('localize error', e); }
+        }
+
+        async function appendMessage(text, sender, isImage = false) {
+            const chatBox = document.getElementById("chatBox");
+            const msg = document.createElement("div");
+            msg.className = `message ${sender}`;
+            // Server-side handles translation when needed; just render the text returned by the server.
+
+            if (isImage) {
+                const img = document.createElement("img");
+                img.src = text;
+                img.className = "preview-img";
+                msg.appendChild(img);
+            } else {
+                // Render a small subset of Markdown (bold + bullet lists + paragraphs) for cleaner chat output
+                // For bot messages, add a "listen" button that speaks the message via Web Speech API
+                if (sender === 'bot') {
+                    const header = document.createElement('div');
+                    header.className = 'msg-header';
+                    const listenBtn = document.createElement('button');
+                    listenBtn.className = 'listen-btn material-icons';
+                    listenBtn.title = 'Play/Stop';
+                    listenBtn.textContent = 'volume_up';
+                    listenBtn.style.marginRight = '8px';
+                    // Use closure to capture the button and text; toggleSpeak handles play/stop
+                    listenBtn.addEventListener('click', () => toggleSpeak(listenBtn, text));
+                    header.appendChild(listenBtn);
+                    msg.appendChild(header);
+                }
+
+                const content = document.createElement('div');
+                content.className = 'msg-content';
+                content.innerHTML = renderMarkdown(text);
+                msg.appendChild(content);
+            }
+
+            chatBox.appendChild(msg);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        // Shared audio player and current playing reference
+        let audioPlayer = null;
+        let currentPlayingBtn = null;
+
+        function stripMarkdown(text) {
+            if (!text) return '';
+            // Removes **bold** and * list markers
+            return text
+                .replace(/\*\*(.*?)\*\*/g, '$1')
+                .replace(/^[\*\-]\s+/gm, '');
+        }
+
+        // Toggle playback for a given bot message text. Clicking the same button while playing stops playback.
+        async function toggleSpeak(button, text) {
+            // If already playing this message, stop it
+            if (audioPlayer && !audioPlayer.paused && currentPlayingBtn === button) {
+                audioPlayer.pause();
+                audioPlayer.currentTime = 0;
+                currentPlayingBtn.textContent = 'volume_up';
+                currentPlayingBtn = null;
+                return;
+            }
+
+            // Stop any existing playback
+            if (audioPlayer) {
+                try { audioPlayer.pause(); } catch (e) { /* ignore */ }
+                if (currentPlayingBtn) currentPlayingBtn.textContent = 'volume_up';
+                audioPlayer = null;
+                currentPlayingBtn = null;
+            }
+
+                // Update UI to show playing state
+            button.textContent = 'stop';
+            currentPlayingBtn = button;
+
+            const cleanText = stripMarkdown(text);
+
+            try {
+                const ttsLang = (audioFallbackToEnglish && selectedLanguage === 'kn') ? 'en' : selectedLanguage;
+
+                // Call the unified /tts endpoint which now uses Edge TTS
+                const res = await fetch('/tts', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text: cleanText, lang: ttsLang })
+                });
+
+                if (!res.ok) {
+                    const body = await res.json().catch(() => ({}));
+                    console.error('TTS failed', res.status, body);
+                    alert('TTS failed: ' + (body.error || res.statusText));
+                    button.textContent = 'volume_up';
+                    currentPlayingBtn = null;
+                    return;
+                }
+
+                const contentType = res.headers.get('Content-Type') || 'audio/mpeg';
+                const buf = await res.arrayBuffer();
+                const blob = new Blob([buf], { type: contentType });
+                const url = URL.createObjectURL(blob);
+                audioPlayer = new Audio(url);
+                audioPlayer.onended = () => {
+                    if (currentPlayingBtn) currentPlayingBtn.textContent = 'volume_up';
+                    currentPlayingBtn = null;
+                    try { URL.revokeObjectURL(url); } catch (e) { /* ignore */ }
+                };
+                audioPlayer.onerror = (e) => {
+                    console.error('Audio playback error', e);
+                    alert('Audio playback failed.');
+                    if (currentPlayingBtn) currentPlayingBtn.textContent = 'volume_up';
+                    currentPlayingBtn = null;
+                };
+                await audioPlayer.play();
+            } catch (err) {
+                console.error('TTS or playback failed', err);
+                alert('TTS or playback failed.');
+                if (currentPlayingBtn) currentPlayingBtn.textContent = 'volume_up';
+                currentPlayingBtn = null;
+            }
+        }
+
+        // (Server-side TTS only now) — no browser voice selector or preview control.
+
+        // Very small, safe markdown renderer (supports **bold**, *list items*, and basic paragraphs)
+        function escapeHtml(unsafe) {
+            return unsafe
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/\"/g, "&quot;")
+                .replace(/\'/g, "&#039;");
+        }
+
+        function renderMarkdown(text) {
+            if (!text) return '';
+            // Normalize line endings
+            const lines = text.replace(/\r/g, '').split('\n');
+            let out = '';
+            let inList = false;
+
+            const flushList = () => { if (inList) { out += '</ul>'; inList = false; } };
+
+            for (let i = 0; i < lines.length; i++) {
+                let line = lines[i].trim();
+                if (line.match(/^\*\s+/) || line.match(/^\-\s+/)) {
+                    if (!inList) { out += '<ul>'; inList = true; }
+                    const item = line.replace(/^([\*\-])\s+/, '');
+                    out += '<li>' + formatInline(escapeHtml(item)) + '</li>';
+                } else if (line === '') {
+                    flushList();
+                    out += '<p></p>';
+                } else {
+                    flushList();
+                    out += '<p>' + formatInline(escapeHtml(line)) + '</p>';
+                }
+            }
+            flushList();
+            return out;
+        }
+
+        function formatInline(s) {
+            // bold **text**
+            s = s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+            // italic *text* (only if not already bold)
+            s = s.replace(/\*(.+?)\*/g, '<em>$1</em>');
+            return s;
+        }
+
+        function showLoading() {
+            const chatBox = document.getElementById("chatBox");
+            const loadingDiv = document.createElement("div");
+            loadingDiv.className = "message bot thinking";
+            loadingDiv.innerHTML = `
+        <div class="dot-loader">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    `;
+            chatBox.appendChild(loadingDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+
+
+
+        function removeLoading() {
+            const chatBox = document.getElementById("chatBox");
+            const loaders = chatBox.querySelectorAll('.message.bot.thinking');
+            loaders.forEach(ld => ld.parentNode && ld.parentNode.removeChild(ld));
+        }
+
+        async function sendMessage() {
+            // If an override message is provided (from voice), use that; otherwise use the input field
+            const input = document.getElementById("userInput");
+            const override = arguments.length > 0 ? arguments[0] : undefined;
+            const message = (typeof override === 'string') ? override.trim() : input.value.trim();
+            const imageInput = document.getElementById("imageUpload");
+            const file = imageInput.files[0];
+
+            if (!message && !file) return;
+
+            if (message) appendMessage(message, "user");
+            // if (file) {
+            //     const reader = new FileReader();
+            //     reader.onload = function (e) {
+            //         appendMessage(e.target.result, "user", true);
+            //     };
+            //     reader.readAsDataURL(file);
+            // }
+
+            // Only clear the input if we used it (not when sending a voice override)
+            if (typeof override !== 'string') input.value = "";
+            imageInput.value = "";
+            showLoading();
+
+            const formData = new FormData();
+            formData.append("message", message);
+            // Inform server of the selected language so server can translate if needed
+            formData.append("lang", selectedLanguage || 'en');
+            if (file) formData.append("image", file);
+
+            try {
+                const response = await fetch("http://localhost:5000/chat", {
+                    method: "POST",
+                    body: formData
+                });
+
+                const data = await response.json();
+                removeLoading();
+                appendMessage(data.reply, "bot");
+            } catch (error) {
+                removeLoading();
+                appendMessage("Something went wrong. Please try again.", "bot");
+            }
+        }
+
+
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        }
+
+        function handleImageUpload() {
+            const input = document.getElementById("imageUpload");
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    appendMessage(e.target.result, "user", true);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        let recognition;
+        let isRecognizing = false;
+        let currentInterim = '';
+        let silenceTimer = null;
+        const SILENCE_TIMEOUT_MS = 1200; // wait 1.2s of silence before auto-send
+        let lastVoiceSend = 0;
+
+        function initVoiceRecognition() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                alert("Speech recognition not supported in this browser.");
+                return;
+            }
+
+            recognition = new SpeechRecognition();
+            recognition.lang = selectedLanguage === 'kn' ? 'kn-IN' : 'en-US';
+            // allow interim results so we can wait for final or silence
+            recognition.interimResults = true;
+            // continuous keeps the recognition session open while user speaks
+            recognition.continuous = true;
+
+            recognition.onstart = () => {
+                isRecognizing = true;
+                currentInterim = '';
+                console.log("Voice recognition started");
+                const micIcon = document.getElementById("micIcon");
+                micIcon.textContent = "graphic_eq";  // change icon to indicate listening
+            };
+
+            recognition.onend = () => {
+                isRecognizing = false;
+                const micIcon = document.getElementById("micIcon");
+                micIcon.textContent = "mic";  // revert icon
+                // If recognition ended and we still have interim text, send after short timeout
+                if (currentInterim) {
+                    scheduleSendAfterSilence(0);
+                }
+            };
+
+            recognition.onresult = (event) => {
+                try {
+                    // Build transcription from results (handle interim + final)
+                    let transcript = '';
+                    let hasFinal = false;
+                    for (let i = event.resultIndex; i < event.results.length; i++) {
+                        const res = event.results[i];
+                        const txt = res[0].transcript.trim();
+                        if (res.isFinal) {
+                            hasFinal = true;
+                            transcript += txt + ' ';
+                        } else {
+                            transcript += txt + ' ';
+                        }
+                    }
+                    transcript = transcript.trim();
+                    currentInterim = transcript;
+
+                    if (hasFinal) {
+                        const now = Date.now();
+                        if (now - lastVoiceSend > 800) {
+                            lastVoiceSend = now;
+                            if (silenceTimer) { clearTimeout(silenceTimer); silenceTimer = null; }
+                            try { recognition.stop(); } catch (e) { /* ignore */ }
+                            isRecognizing = false;
+                            sendMessage(currentInterim);
+                        } else {
+                            console.log('Ignored duplicate final voice result');
+                        }
+                    } else {
+                        // reset silence timer to detect pause
+                        scheduleSendAfterSilence(SILENCE_TIMEOUT_MS);
+                    }
+                } catch (err) {
+                    console.error('onresult handler error', err);
+                }
+            };
+
+            recognition.onerror = (event) => {
+                console.error("Voice error:", event.error);
+                appendMessage("Voice error: " + event.error, "bot");
+                try { recognition.stop(); } catch (e) { /* ignore */ }
+                isRecognizing = false;
+            };
+        }
+
+        function scheduleSendAfterSilence(timeoutMs) {
+            if (silenceTimer) clearTimeout(silenceTimer);
+            silenceTimer = setTimeout(() => {
+                const now = Date.now();
+                if (currentInterim && (now - lastVoiceSend > 800)) {
+                    lastVoiceSend = now;
+                    try { recognition.stop(); } catch (e) { /* ignore */ }
+                    isRecognizing = false;
+                    sendMessage(currentInterim);
+                }
+                silenceTimer = null;
+            }, timeoutMs);
+        }
+
+        function startVoiceInput() {
+            if (!recognition) initVoiceRecognition();
+            // toggle: if already recognizing, stop; otherwise start
+            if (isRecognizing) {
+                try { recognition.stop(); } catch (e) { /* ignore */ }
+                isRecognizing = false;
+                return;
+            }
+            try {
+                recognition.start();
+            } catch (e) {
+                console.error('Failed to start recognition', e);
+            }
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>

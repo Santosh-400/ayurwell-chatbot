@@ -1,0 +1,74 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+.venv/
+venv/
+env/
+ENV/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+uploads/*
+!uploads/.gitkeep
+tmp/*
+!tmp/.gitkeep
+logs/*
+!logs/.gitkeep
+*.log
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Data files (if large)
+Data/*.pdf
+Data/*.csv
+Data/*.json
+
+# Images (if large)
+images/*.jpg
+images/*.png
+images/*.jpeg
+
+# Git
+.git/
+.gitignore
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Jupyter
+*.ipynb_checkpoints/
+multiAgent_rag.ipynb
+
+# Development scripts
+test_*.py
+tmp_*.py
+create_env.py
+setup.py
+test_config.py
+test_setup.py
+
+# Documentation (include in image if needed)
+FIXES_APPLIED.md
+SETUP_INSTRUCTIONS.md

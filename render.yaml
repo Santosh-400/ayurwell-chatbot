@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: ayurwell-app
+    runtime: python
+    buildCommand: pip install -r requirements-prod.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: GOOGLE_API_KEY
+        sync: false
+      - key: PINECONE_API_KEY
+        sync: false
+      - key: TAVILY_API_KEY
+        sync: false
+      - key: PINECONE_INDEX_NAME
+        value: ayurwell-health-index
+      - key: FLASK_ENV
+        value: production
+    healthCheckPath: /
+    autoDeploy: true

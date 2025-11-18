@@ -1,0 +1,245 @@
+D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\langchain_pinecone\__init__.py:3: LangChainDeprecationWarning: As of langchain-core 0.3.0, LangChain uses pydantic v2 internally. The langchain_core.pydantic_v1 module was a compatibility shim for pydantic v1, and should no longer be used. Please update the code to import from Pydantic directly.
+
+For example, replace imports like: `from langchain_core.pydantic_v1 import BaseModel`
+with: `from pydantic import BaseModel`
+or the v1 compatibility namespace if you are working in a code base that has not been fully upgraded to pydantic 2 yet. 	from pydantic.v1 import BaseModel
+
+  from langchain_pinecone.vectorstores import Pinecone, PineconeVectorStore
+D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\chains\rag_chain.py:21: LangChainDeprecationWarning: The class `HuggingFaceEmbeddings` was deprecated in LangChain 0.2.2 and will be removed in 1.0. An updated version of the class exists in the :class:`~langchain-huggingface package and should be used instead. To use it run `pip install -U :class:`~langchain-huggingface` and import as `from :class:`~langchain_huggingface import HuggingFaceEmbeddings``.
+  embeddings = HuggingFaceEmbeddings(model_name=os.getenv("EMBEDDING_MODEL", 'sentence-transformers/all-MiniLM-L6-v2'))
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device: cpu
+D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\chains\rag_chain.py:35: LangChainDeprecationWarning: The class `TavilySearchResults` was deprecated in LangChain 0.3.25 and will be removed in 1.0. An updated version of the class exists in the :class:`~langchain-tavily package and should be used instead. To use it run `pip install -U :class:`~langchain-tavily` and import as `from :class:`~langchain_tavily import TavilySearch``.
+  tavily_search = TavilySearchResults(max_results=3)
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1760860496.380071    2064 alts_credentials.cc:93] ALTS creds ignored. Not running on GCP and untrusted ALTS is not enabled.
+INFO:app:Patched GenerativeServiceClient.generate_content to ignore max_retries kwarg
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\langchain_pinecone\__init__.py:3: LangChainDeprecationWarning: As of langchain-core 0.3.0, LangChain uses pydantic v2 internally. The langchain_core.pydantic_v1 module was a compatibility shim for pydantic v1, and should no longer be used. Please update the code to import from Pydantic directly.
+
+For example, replace imports like: `from langchain_core.pydantic_v1 import BaseModel`
+with: `from pydantic import BaseModel`
+or the v1 compatibility namespace if you are working in a code base that has not been fully upgraded to pydantic 2 yet. 	from pydantic.v1 import BaseModel
+
+  from langchain_pinecone.vectorstores import Pinecone, PineconeVectorStore
+D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\chains\rag_chain.py:21: LangChainDeprecationWarning: The class `HuggingFaceEmbeddings` was deprecated in LangChain 0.2.2 and will be removed in 1.0. An updated version of the class exists in the :class:`~langchain-huggingface package and should be used instead. To use it run `pip install -U :class:`~langchain-huggingface` and import as `from :class:`~langchain_huggingface import HuggingFaceEmbeddings``.
+  embeddings = HuggingFaceEmbeddings(model_name=os.getenv("EMBEDDING_MODEL", 'sentence-transformers/all-MiniLM-L6-v2'))
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device: cpu
+D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\chains\rag_chain.py:35: LangChainDeprecationWarning: The class `TavilySearchResults` was deprecated in LangChain 0.3.25 and will be removed in 1.0. An updated version of the class exists in the :class:`~langchain-tavily package and should be used instead. To use it run `pip install -U :class:`~langchain-tavily` and import as `from :class:`~langchain_tavily import TavilySearch``.
+  tavily_search = TavilySearchResults(max_results=3)
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1760860504.458458   15064 alts_credentials.cc:93] ALTS creds ignored. Not running on GCP and untrusted ALTS is not enabled.
+INFO:app:Patched GenerativeServiceClient.generate_content to ignore max_retries kwarg
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 561-708-925
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:25:20] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:26:55] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:26:55] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:26:55] "[36mGET /static/arrow.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:26:58] "[36mGET /static/brain.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:27:03] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:27:33] "[36mGET /static/brain.png HTTP/1.1[0m" 304 -
+WARNING:langchain_google_genai.chat_models:Retrying langchain_google_genai.chat_models._chat_with_retry.<locals>._chat_with_retry in 2.0 seconds as it raised ResourceExhausted: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15
+Please retry in 4.699779185s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 4
+}
+].
+ERROR:app:Chatbot workflow failed
+Traceback (most recent call last):
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\app.py", line 97, in chat
+    result = chatbot.invoke(input=input_data, config={"configurable": {"thread_id": 3}})
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\langgraph\pregel\main.py", line 3085, in invoke
+    for chunk in self.stream(
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\langgraph\pregel\main.py", line 2674, in stream
+    for _ in runner.tick(
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\langgraph\pregel\_runner.py", line 162, in tick
+    run_with_retry(
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\langgraph\pregel\_retry.py", line 42, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\langgraph\_internal\_runnable.py", line 657, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\langgraph\_internal\_runnable.py", line 401, in invoke
+    ret = self.func(*args, **kwargs)
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\Agents\retrieval.py", line 62, in retrieval_grader
+    result = grader_llm.invoke({})
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\langchain_core\runnables\base.py", line 3246, in invoke
+    input_ = context.run(step.invoke, input_, config)
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\langchain_core\runnables\base.py", line 5711, in invoke
+    return self.bound.invoke(
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\langchain_core\language_models\chat_models.py", line 395, in invoke
+    self.generate_prompt(
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\langchain_core\language_models\chat_models.py", line 1025, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\langchain_core\language_models\chat_models.py", line 842, in generate
+    self._generate_with_cache(
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\langchain_core\language_models\chat_models.py", line 1091, in _generate_with_cache
+    result = self._generate(
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\langchain_google_genai\chat_models.py", line 961, in _generate
+    response: GenerateContentResponse = _chat_with_retry(
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\langchain_google_genai\chat_models.py", line 196, in _chat_with_retry
+    return _chat_with_retry(**kwargs)
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\tenacity\__init__.py", line 338, in wrapped_f
+    return copy(f, *args, **kw)
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\tenacity\__init__.py", line 477, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\tenacity\__init__.py", line 378, in iter
+    result = action(retry_state)
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\tenacity\__init__.py", line 420, in exc_check
+    raise retry_exc.reraise()
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\tenacity\__init__.py", line 187, in reraise
+    raise self.last_attempt.result()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\concurrent\futures\_base.py", line 451, in result
+    return self.__get_result()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\concurrent\futures\_base.py", line 403, in __get_result
+    raise self._exception
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\tenacity\__init__.py", line 480, in __call__
+    result = fn(*args, **kwargs)
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\langchain_google_genai\chat_models.py", line 194, in _chat_with_retry
+    raise e
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\langchain_google_genai\chat_models.py", line 178, in _chat_with_retry
+    return generation_method(**kwargs)
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\app.py", line 34, in _patched_generate_content
+    return orig(self, *args, **kwargs)
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\google\ai\generativelanguage_v1beta\services\generative_service\client.py", line 835, in generate_content
+    response = rpc(
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\google\api_core\grpc_helpers.py", line 77, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.ResourceExhausted: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15
+Please retry in 2.240330073s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 2
+}
+]
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:27:58] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:28:39] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:29:10] "[36mGET /static/arrow-white.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:29:45] "[36mGET /static/arrow.png HTTP/1.1[0m" 304 -
+INFO:werkzeug: * Detected change in 'D:\\PES\\sem-7\\AI in HealthCare\\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\\app.py', reloading
+INFO:werkzeug: * Restarting with stat
+D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\.venv\lib\site-packages\langchain_pinecone\__init__.py:3: LangChainDeprecationWarning: As of langchain-core 0.3.0, LangChain uses pydantic v2 internally. The langchain_core.pydantic_v1 module was a compatibility shim for pydantic v1, and should no longer be used. Please update the code to import from Pydantic directly.
+
+For example, replace imports like: `from langchain_core.pydantic_v1 import BaseModel`
+with: `from pydantic import BaseModel`
+or the v1 compatibility namespace if you are working in a code base that has not been fully upgraded to pydantic 2 yet. 	from pydantic.v1 import BaseModel
+
+  from langchain_pinecone.vectorstores import Pinecone, PineconeVectorStore
+D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\chains\rag_chain.py:21: LangChainDeprecationWarning: The class `HuggingFaceEmbeddings` was deprecated in LangChain 0.2.2 and will be removed in 1.0. An updated version of the class exists in the :class:`~langchain-huggingface package and should be used instead. To use it run `pip install -U :class:`~langchain-huggingface` and import as `from :class:`~langchain_huggingface import HuggingFaceEmbeddings``.
+  embeddings = HuggingFaceEmbeddings(model_name=os.getenv("EMBEDDING_MODEL", 'sentence-transformers/all-MiniLM-L6-v2'))
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device: cpu
+D:\PES\sem-7\AI in HealthCare\HEALTHGURU--A-Multimodal-Conversational-AI-Chatbot-for-Health-Assistance-with-Integrated-Agentic-RAG-main\chains\rag_chain.py:35: LangChainDeprecationWarning: The class `TavilySearchResults` was deprecated in LangChain 0.3.25 and will be removed in 1.0. An updated version of the class exists in the :class:`~langchain-tavily package and should be used instead. To use it run `pip install -U :class:`~langchain-tavily` and import as `from :class:`~langchain_tavily import TavilySearch``.
+  tavily_search = TavilySearchResults(max_results=3)
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1760860835.982501    4296 alts_credentials.cc:93] ALTS creds ignored. Not running on GCP and untrusted ALTS is not enabled.
+INFO:app:Patched GenerativeServiceClient.generate_content to ignore max_retries kwarg
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 561-708-925
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:32:14] "GET /static/style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:32:14] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:35:00] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:35:00] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:35:00] "GET /static/style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:35:00] "[36mGET /static/arrow.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:35:02] "[36mGET /static/arrow-white.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:35:24] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:35:24] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:36:45] "[36mGET /static/arrow.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:37:50] "[36mGET /static/arrow.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:37:53] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:37:53] "GET /static/style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:37:53] "[36mGET /static/arrow.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:37:55] "[36mGET /static/arrow-white.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:39:26] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:39:26] "GET /static/style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:39:26] "[36mGET /static/arrow.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:39:30] "[36mGET /static/arrow-white.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:40:03] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:40:03] "[36mGET /static/arrow.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:40:03] "GET /static/style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:40:36] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:40:36] "[36mGET /static/arrow.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:40:36] "GET /static/style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:40:51] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:40:51] "GET /static/style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:40:51] "[36mGET /static/arrow.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:41:10] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:41:10] "[36mGET /static/arrow.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:41:10] "GET /static/style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:41:15] "[36mGET /static/brain.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:41:19] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:44:04] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:44:04] "[36mGET /static/arrow.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:44:04] "GET /static/style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:44:08] "[36mGET /static/arrow-white.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:50:40] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:50:40] "[36mGET /static/arrow.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:50:40] "GET /static/style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:50:48] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:52:55] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:54:41] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:54:41] "[36mGET /static/arrow.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:54:41] "GET /static/style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:54:54] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:56:27] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Oct/2025 13:58:15] "[36mGET /static/arrow-white.png HTTP/1.1[0m" 304 -
+forrtl: error (200): program aborting due to window-CLOSE event
+Image              PC                Routine            Line        Source             
+KERNELBASE.dll     00007FF93E6AC1BD  Unknown               Unknown  Unknown
+KERNEL32.DLL       00007FF940FBE8D7  Unknown               Unknown  Unknown
+ntdll.dll          00007FF94144C53C  Unknown               Unknown  Unknown
+forrtl: error (200): program aborting due to window-CLOSE event
+Image              PC                Routine            Line        Source             
+KERNELBASE.dll     00007FF93E6AC1BD  Unknown               Unknown  Unknown
+KERNEL32.DLL       00007FF940FBE8D7  Unknown               Unknown  Unknown
+ntdll.dll          00007FF94144C53C  Unknown               Unknown  Unknown
