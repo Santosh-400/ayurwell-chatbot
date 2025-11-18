@@ -1,7 +1,6 @@
 import os
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
 from langchain_pinecone import PineconeVectorStore
-from langchain_community.embeddings import HuggingFaceEmbeddings
 from .prompt_templates import rag_prompt
 try:
     from langchain_tavily import TavilySearchResults
@@ -9,7 +8,7 @@ except ImportError:
     from langchain_community.tools.tavily_search import TavilySearchResults
 
 # Get env variables safely (fall back to sensible defaults)
-index_name = os.getenv("index_name", "AyurWell")
+index_name = os.getenv("index_name", "ayurwell")
 # Prefer explicit default but do not allow legacy model names to be used from environment.
 env_model = os.getenv("model")
 if env_model and "gemini-1.5" in env_model:
@@ -18,7 +17,8 @@ if env_model and "gemini-1.5" in env_model:
 # (confirmed via REST model list): gemini-2.0-flash-001
 model = "gemini-2.0-flash-001"
 
-embeddings = HuggingFaceEmbeddings(model_name=os.getenv("EMBEDDING_MODEL", 'sentence-transformers/all-MiniLM-L6-v2'))
+# Use Google's embeddings instead of HuggingFace (lighter and cloud-friendly)
+embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
 
 # Initialize Pinecone retriever from existing index
 try:
