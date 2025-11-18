@@ -1,0 +1,59 @@
+# Production Requirements (Optimized for Cloud Deployment)
+# Core Web Framework
+flask==3.0.3
+flask-cors==5.0.0
+gunicorn==23.0.0
+
+# HTTP & Web Scraping
+requests==2.32.3
+beautifulsoup4==4.12.3
+lxml==5.3.0
+
+# NLP & Text Processing (Lightweight)
+nltk==3.9.1
+
+# AI & LLM Framework
+langchain==0.3.13
+langchain-core==0.3.28
+langchain_community==0.3.13
+langchain-google-genai==2.0.8
+langchain_experimental==0.3.3
+langchain-tavily==0.2.13
+langgraph==0.2.59
+
+# Vector Database
+pinecone==5.4.2
+langchain-pinecone==0.2.0
+
+# Document Processing
+pypdf==5.1.0
+
+# Configuration & Environment
+python-dotenv==1.0.1
+
+# Image Processing (Lightweight)
+Pillow==11.0.0
+
+# Translation & TTS
+deep-translator==1.11.4
+gTTS==2.5.3
+edge-tts==6.1.18
+
+# Web Search
+tavily-python==0.5.0
+
+# HuggingFace (Without heavy models)
+huggingface_hub==0.26.5
+
+# REMOVED FOR CLOUD DEPLOYMENT:
+# - pyaudio (requires audio drivers, not available in cloud)
+# - pyttsx3 (requires system TTS engines)
+# - spacy (large models, high memory usage)
+# - sentence-transformers (heavy, using API embeddings instead)
+# - SpeechRecognition (handled client-side via browser)
+# - pydub (audio processing not needed server-side)
+
+# Note: If you need embeddings, use API-based solutions like:
+# - OpenAI embeddings
+# - Cohere embeddings
+# - Google embeddings (via langchain-google-genai)
