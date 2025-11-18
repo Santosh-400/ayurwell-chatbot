@@ -25,10 +25,12 @@ def retrieve(state: AgentState):
     
     try:
         documents = retriever.invoke(state["enhanced_query"])
-        print(f"retrieve: Retrieved {len(documents)} documents")
+        print(f"✓ PINECONE: Retrieved {len(documents)} documents from Pinecone vector database")
+        if documents:
+            print(f"✓ PINECONE: First document preview: {documents[0].page_content[:100]}...")
         state["documents"] = documents
     except Exception as e:
-        print(f"Error during retrieval: {e}")
+        print(f"✗ PINECONE ERROR: Failed to retrieve from Pinecone - {e}")
         state["documents"] = []
     return state
 
@@ -71,16 +73,17 @@ def retrieval_grader(state: AgentState):
     return state
 
 def websearch(state: AgentState):
-    print("Entering web_search fallback")
+    print("⚠ WEB SEARCH: Pinecone data insufficient, falling back to web search")
     
     if tavily_search is None:
-        print("web_search: Tavily search not available")
+        print("✗ WEB SEARCH: Tavily search not available")
         state["documents"] = []
         state["proceed_to_generate"] = False
         return state
     
     # Force Ayurvedic context in web search
     ayurvedic_query = f"Ayurvedic treatment remedy {state['enhanced_query']}"
+    print(f"✓ WEB SEARCH: Searching web for: {ayurvedic_query}")
     
     try:
         results = tavily_search.invoke({"query": ayurvedic_query})
