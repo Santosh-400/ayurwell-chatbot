@@ -58,11 +58,6 @@ google-auth==2.43.0
 # - sentence-transformers (heavy, using API embeddings instead)
 # - SpeechRecognition (handled client-side via browser)
 # - pydub (audio processing not needed server-side)
-# Added for HuggingFace local embeddings
-# NOTE: heavy ML packages removed to avoid large on-instance installs (use remote embeddings)
-# If you require local embeddings on the server, re-add:
-# sentence-transformers==2.2.2
-# torch==2.2.0
 
 # Note: If you need embeddings, use API-based solutions like:
 # - OpenAI embeddings
